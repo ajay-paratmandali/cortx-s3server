@@ -1,4 +1,4 @@
-#!/usr/bin/python3.6
+#!/bin/sh -x
 #
 # Copyright (c) 2020 Seagate Technology LLC and/or its Affiliates
 #
@@ -16,21 +16,8 @@
 #
 # For any questions about this software or licensing,
 # please email opensource@seagate.com or cortx-questions@seagate.com.
+#
 
-""" To delete KV for a key you need to execute this file as:
+cd "$(dirname "$0")"
 
-    python36 delete_kv.py index_id key it's like 
-    python36 delete_kv.py sys.argv[1] sys.argv[2] """
-import sys
-from s3backgrounddelete.cortx_s3_config import CORTXS3Config
-from s3backgrounddelete.cortx_s3_kv_api import CORTXS3KVApi
-from s3backgrounddelete.cortx_s3_constants import CONNECTION_TYPE_PRODUCER
-
-CONFIG = CORTXS3Config()
-kv_api = CORTXS3KVApi(CONFIG, CONNECTION_TYPE_PRODUCER)
-response, data = kv_api.delete(sys.argv[1], sys.argv[2])
-if(response):
-        print("Success")
-else:
-        print("Error")
-        print(data.get_error_message())
+/opt/seagate/cortx/s3/s3backgrounddelete/s3backgroundproducer
